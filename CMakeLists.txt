@@ -9,6 +9,10 @@ if("${CMAKE_CXX_COMPILER_ID}" MATCHES "(GNU|Clang)")
     set(CMAKE_CXX_FLAGS " -std=c++11")
 endif()
 
+if (UNIX)
+	add_definitions(-Dunix)
+endif()
+
 find_package(FLTK REQUIRED)
 
 include_directories(${FLTK_INCLUDE_DIR})
@@ -34,6 +38,6 @@ add_executable(webeditor
 	FtpClient/FTPFileStatus.cpp
 	FtpClient/FTPListParse.cpp
 	)
-target_link_libraries(webeditor ${FLTK_LIBRARIES})
+target_link_libraries(webeditor ${FLTK_LIBRARIES} dl)
 
 
