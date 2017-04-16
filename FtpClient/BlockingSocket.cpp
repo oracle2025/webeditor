@@ -403,7 +403,7 @@ int CHttpBlockingSocket::ReadHttpHeaderLine(char* pch, int nSize, int nSecs)
 // inserts zero string terminator, object maintains a buffer
 {
    int       nBytesThisTime = m_nReadBuf;
-   ptrdiff_t nLineLength    = 0;
+   std::ptrdiff_t nLineLength    = 0;
    char*     pch1           = m_pReadBuf;
    char*     pch2           = NULL;
 

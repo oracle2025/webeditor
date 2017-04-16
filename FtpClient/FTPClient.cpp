@@ -478,7 +478,7 @@ bool CFTPClient::Login(const CLogonInfo& logonInfo)
    tstring   strTemp;
    USHORT    ushPort=0;
 
-   if( logonInfo.FwType() == CFirewallType::None())
+   if( logonInfo.FwType() == CFirewallType::None_())
    {
       strTemp = logonInfo.Hostname();
       ushPort = logonInfo.Hostport();
@@ -1713,7 +1713,7 @@ int CFTPClient::TransferMode(const CTransferMode& crTransferMode) const
 ///                    about the server FTP process. This should include current
 ///                    values of all transfer parameters and the status of connections.
 /// @return see return values of CFTPClient::SimpleErrorCheck
-int CFTPClient::Status(const tstring& strPath) const
+int CFTPClient::Status_(const tstring& strPath) const
 {
    CReply Reply;
    if( !SendCommand(CCommand::STAT(), strPath, Reply) )

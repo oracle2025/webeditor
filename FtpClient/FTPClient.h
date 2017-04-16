@@ -132,7 +132,7 @@ namespace nsFTP
       int Allocate(int iReserveBytes, const int* piMaxPageOrRecordSize=NULL) const;
       int StructureMount(const tstring& strPath) const;
       int SiteParameters(const tstring& strCmd) const;
-      int Status(const tstring& strPath) const;
+      int Status_(const tstring& strPath) const;
       int Help(const tstring& strTopic) const;
 
       int Reinitialize() const;

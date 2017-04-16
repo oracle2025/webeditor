@@ -130,7 +130,7 @@ namespace nsFTP
       tstring AsStorageString() const;
       static void GetAllTypes(TFirewallTypeVector& vTypes);
 
-      static const CFirewallType None()                             { return ftNone;                             }
+      static const CFirewallType None_()                             { return ftNone;                             }
       static const CFirewallType SiteHostName()                     { return ftSiteHostName;                     }
       static const CFirewallType UserAfterLogon()                   { return ftUserAfterLogon;                   }
       static const CFirewallType ProxyOpen()                        { return ftProxyOpen;                        }
@@ -344,7 +344,7 @@ namespace nsFTP
       void SetFirewall(const tstring& strFwHostname, const tstring& strFwUsername, const tstring& strFwPassword,
                        USHORT ushFwPort, const CFirewallType& crFwType);
 
-      void DisableFirewall() { m_FwType = CFirewallType::None(); }
+      void DisableFirewall() { m_FwType = CFirewallType::None_(); }
 
       const tstring&       Hostname()   const  { return m_strHostname;    }
       USHORT               Hostport()   const  { return m_ushHostport;    }

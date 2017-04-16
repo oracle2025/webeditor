@@ -136,7 +136,7 @@ CLogonInfo::CLogonInfo() :
    m_ushHostport(DEFAULT_FTP_PORT),
    m_strUsername(ANONYMOUS_USER),
    m_ushFwPort(DEFAULT_FTP_PORT),
-   m_FwType(CFirewallType::None())
+   m_FwType(CFirewallType::None_())
 {
 }
 
@@ -148,7 +148,7 @@ CLogonInfo::CLogonInfo(const tstring& strHostname, USHORT ushHostport, const tst
    m_strPassword(strPassword),
    m_strAccount(strAccount),
    m_ushFwPort(DEFAULT_FTP_PORT),
-   m_FwType(CFirewallType::None())
+   m_FwType(CFirewallType::None_())
 {
 }
 
