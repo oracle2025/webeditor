@@ -403,33 +403,15 @@ std::string markdown_to_html(const std::string text)
 	std::string result = (char*)ob->data;
 	bufrelease(ob);
 
-	return result;
+	return std::string("<!doctype html><html lang=\"de\"><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n") + result + "</html>";
 }
 
 void preview()
 {
 	const char* text = text_editor->buffer()->text();
-	struct buf ib = { (uint8_t *)text, strlen(text), 0, 0};
-
-	struct sd_callbacks callbacks;
-	struct html_renderopt options;
-	struct sd_markdown *markdown;
-
-	struct buf *ob = bufnew(OUTPUT_UNIT);
-
-	sdhtml_renderer(&callbacks, &options, 0);
-	markdown = sd_markdown_new(0, 16, &callbacks, &options);
-
-	sd_markdown_render(ob, ib.data, ib.size, markdown);
-	sd_markdown_free(markdown);
-
-	//std::string output(ob->data, ob->size):
-
-	//html_view->value(text);
-	ob->data[ob->size] = '\0';
-	html_view->value((const char*)ob->data);
-	source_view->buffer()->text((const char*)ob->data);
-	bufrelease(ob);
+	auto html = markdown_to_html(text);
+	html_view->value(html.c_str());
+	source_view->buffer()->text(html.c_str());
 }
 
 using json = nlohmann::json;
