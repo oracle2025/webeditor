@@ -38,6 +38,11 @@ add_executable(webeditor
 	FtpClient/FTPFileStatus.cpp
 	FtpClient/FTPListParse.cpp
 	)
-target_link_libraries(webeditor ${FLTK_LIBRARIES} dl)
+if (UNIX)
+	target_link_libraries(webeditor ${FLTK_LIBRARIES} dl)
+else()
+	target_link_libraries(webeditor ${FLTK_LIBRARIES})
+endif()
+
 
 
