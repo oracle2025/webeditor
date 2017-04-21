@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 2.8)
 # cmake -G "Visual Studio 14 2015 Win64" --config Release -DFLTK_DIR:PATH=C:/projects/fltk-1.3.4-recompile ..
 # cmake --build . --config Release
 
-if("${CMAKE_CXX_COMPILER_ID}" MATCHES "(GNU|Clang)")
+if(${CMAKE_CXX_COMPILER_ID} MATCHES "(GNU|Clang)")
     set(CMAKE_CXX_FLAGS " -std=c++11")
 endif()
 
@@ -14,6 +14,12 @@ if (UNIX)
 endif()
 
 find_package(FLTK REQUIRED)
+
+#find_package(OpenGL REQUIRED)
+#include_directories(${OpenGL_INCLUDE_DIRS})
+#link_directories(${OpenGL_LIBRARY_DIRS})
+#add_definitions(${OpenGL_DEFINITIONS})
+
 
 include_directories(${FLTK_INCLUDE_DIR})
 include_directories("sundown/src")
