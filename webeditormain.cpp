@@ -22,6 +22,9 @@ class Logger : public nsFTP::CFTPClient::CNotification
 	public:
 		void OnInternalError(const tstring& strErrorMsg, const tstring& strFileName, DWORD dwLineNr)
 		{
+			std::ostringstream str;
+			str << "Error: (" << strFileName << ":" << dwLineNr << ")" << strErrorMsg << std::endl;
+			fl_alert(str.str().c_str());
 			std::cout << "Error: (" << strFileName << ":" << dwLineNr << ")" << strErrorMsg << std::endl;
 		}
 };
@@ -47,8 +50,14 @@ void list()
 
 	if (!ftpClient.Login(logonInfo)) {
 		std::cout << "ERROR Login" << std::endl;
+		std::ostringstream str;
+		str << "ERROR Login" << std::endl;
+		fl_alert(str.str().c_str());
 	} else {
 		std::cout << "LOGIN Success" << std::endl;
+		std::ostringstream str;
+		str << "LOGIN Success" << std::endl;
+		fl_alert(str.str().c_str());
 	}
 
 
@@ -57,8 +66,13 @@ void list()
 	nsFTP::TStringVector list;
 	if(!ftpClient.NameList("/", list, true)) {
 		std::cout << "Error List" << std::endl;
+		std::ostringstream str;
+		str << "Error List" << std::endl;
+		fl_alert(str.str().c_str());
 	} else {
 		std::cout << "List success" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	}
 
 	// iterate listing
@@ -106,8 +120,12 @@ void upload_str_to_file(const std::string &content, const std::string &filename)
 
 	if (!ftpClient.Login(logonInfo)) {
 		std::cout << "ERROR Login" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	} else {
 		std::cout << "LOGIN Success" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	}
 
 	//auto temp_file = tmpfile();
@@ -137,8 +155,12 @@ FILE * tmpfile ( void );
 */
 	if (!ftpClient.UploadFile("uploadfile.txt", filename, false, nsFTP::CRepresentation(nsFTP::CType::Image()), true)) {
 		std::cout << "ERROR Upload" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	} else {
 		std::cout << "SUCCESS Upload" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	}
 	unlink("uploadfile.txt");
 	ftpClient.Logout(); 
@@ -183,8 +205,12 @@ void upload()
 
 	if (!ftpClient.Login(logonInfo)) {
 		std::cout << "ERROR Login" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	} else {
 		std::cout << "LOGIN Success" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	}
 
 	//auto temp_file = tmpfile();
@@ -214,8 +240,12 @@ FILE * tmpfile ( void );
 */
 	if (!ftpClient.UploadFile("uploadfile.txt", filename, false, nsFTP::CRepresentation(nsFTP::CType::Image()), true)) {
 		std::cout << "ERROR Upload" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	} else {
 		std::cout << "SUCCESS Upload" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	}
 	unlink("uploadfile.txt");
 
@@ -235,8 +265,12 @@ FILE * tmpfile ( void );
 		std::cout << filename_html << std::endl;
 		if (!ftpClient.UploadFile("uploadfile2.txt", filename_html, false, nsFTP::CRepresentation(nsFTP::CType::Image()), true)) {
 			std::cout << "ERROR Upload" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 		} else {
 			std::cout << "SUCCESS Upload" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 		}
 		unlink("uploadfile2.txt");
     }
@@ -247,8 +281,12 @@ FILE * tmpfile ( void );
 	nsFTP::TStringVector list;
 	if(!ftpClient.NameList("/", list, true)) {
 		std::cout << "Error List" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	} else {
 		std::cout << "List success" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	}
 
 	// iterate listing
@@ -319,8 +357,12 @@ void edit()
 
 	if (!ftpClient.Login(logonInfo)) {
 		std::cout << "ERROR Login" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	} else {
 		std::cout << "LOGIN Success" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	}
 	
 	/*std::ofstream f("uploadfile.txt");
@@ -334,9 +376,13 @@ void edit()
 	unlink("uploadfile.txt");
 	if(!ftpClient.DownloadFile(filename, "uploadfile.txt", nsFTP::CRepresentation(nsFTP::CType::Image()), true)) {
 		std::cout << "ERROR Edit" << std::endl;
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	} else {
 		std::cout << "SUCCESS Edit" << std::endl;
 		filename_output->value(filename);
+			std::ostringstream str;
+			fl_alert(str.str().c_str());
 	}
 	text_editor->buffer()->text(getFileContent("uploadfile.txt").c_str());
 	/*if (!ftpClient.UploadFile("uploadfile.txt", filename, false, nsFTP::CRepresentation(nsFTP::CType::Image()), true)) {
