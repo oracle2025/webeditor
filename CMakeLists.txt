@@ -26,6 +26,13 @@ include_directories("sundown/src")
 include_directories("sundown/html")
 include_directories("FtpClient")
 
+add_executable(picturequiz
+	sqlite3.c
+	sqlite3.h
+	picturequiz/picturequiz.cpp
+	picturequiz/picturequiz.h
+	picturequiz/picturequizmain.cpp
+	)
 #add_executable(webeditor WIN32
 add_executable(webeditor 
 	webeditormain.cpp
@@ -46,8 +53,10 @@ add_executable(webeditor
 	)
 if (UNIX)
 	target_link_libraries(webeditor ${FLTK_LIBRARIES} dl)
+	target_link_libraries(picturequiz ${FLTK_LIBRARIES} dl)
 else()
 	target_link_libraries(webeditor ${FLTK_LIBRARIES})
+	target_link_libraries(picturequiz ${FLTK_LIBRARIES})
 endif()
 
 
