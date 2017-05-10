@@ -23,21 +23,17 @@ decl {void create();} {public global
 Function {make_window()} {open
 } {
   Fl_Window {} {open
-    xywh {526 405 740 400} type Double align 80 visible
+    xywh {600 192 740 401} type Double align 80 resizable visible
   } {
-    Fl_Browser file_browser {
-      label Files
-      xywh {0 20 220 135} type Select align 5
-    }
     Fl_Tabs {} {open
-      xywh {220 0 520 400}
+      xywh {220 0 520 400} resizable
     } {
       Fl_Group {} {
         label Edit open
         xywh {220 20 520 380}
       } {
-        Fl_Text_Editor text_editor {
-          xywh {220 50 520 325}
+        Fl_Text_Editor text_editor {selected
+          xywh {220 50 520 325} resizable
         }
         Fl_Button {} {
           label Preview
@@ -66,48 +62,55 @@ Function {make_window()} {open
         }
       }
     }
-    Fl_Input server_input {
-      label Server
-      xywh {70 160 145 25}
-    }
-    Fl_Input user_input {
-      label User
-      xywh {70 190 145 25}
-    }
-    Fl_Input password_input {
-      label Password
-      xywh {70 220 145 25} type Secret
-    }
-    Fl_Button {} {
-      label List
-      callback {list();}
-      xywh {5 250 210 25}
-    }
-    Fl_Button {} {
-      label Upload
-      callback {upload();}
-      xywh {5 340 210 25}
-    }
-    Fl_Button {} {
-      label Create
-      callback {create();}
-      xywh {5 310 210 25}
-    }
-    Fl_Button {} {
-      label Edit
-      callback {edit();}
-      xywh {5 280 210 25}
-    }
-    Fl_Button {} {
-      label Delete
-      callback {delete_();}
-      xywh {5 370 210 25}
+    Fl_Group {} {open
+      xywh {0 0 220 400}
+    } {
+      Fl_Browser file_browser {
+        label Files
+        xywh {0 20 220 135} type Select align 5 resizable
+      }
+      Fl_Input server_input {
+        label Server
+        xywh {70 160 145 25}
+      }
+      Fl_Input user_input {
+        label User
+        xywh {70 190 145 25}
+      }
+      Fl_Input password_input {
+        label Password
+        xywh {70 220 145 25} type Secret
+      }
+      Fl_Button {} {
+        label List
+        callback {list();}
+        xywh {5 250 210 25}
+      }
+      Fl_Button {} {
+        label Upload
+        callback {upload();}
+        xywh {5 340 210 25}
+      }
+      Fl_Button {} {
+        label Create
+        callback {create();}
+        xywh {5 310 210 25}
+      }
+      Fl_Button {} {
+        label Edit
+        callback {edit();}
+        xywh {5 280 210 25}
+      }
+      Fl_Button {} {
+        label Delete
+        callback {delete_();}
+        xywh {5 370 210 25}
+      }
     }
   }
   code {text_editor->buffer(new Fl_Text_Buffer());
 text_editor->buffer()->text("Hello");
 //html_view->load("../sample.html");
 html_view->value("<h1>Hello HTML</h1>");
-source_view->buffer(new Fl_Text_Buffer());} {selected
-  }
+source_view->buffer(new Fl_Text_Buffer());} {}
 }

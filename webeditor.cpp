@@ -2,8 +2,6 @@
 
 #include "webeditor.h"
 
-Fl_Browser *file_browser=(Fl_Browser *)0;
-
 Fl_Text_Editor *text_editor=(Fl_Text_Editor *)0;
 
 static void cb_Preview(Fl_Button*, void*) {
@@ -15,6 +13,8 @@ Fl_Output *filename_output=(Fl_Output *)0;
 Fl_Help_View *html_view=(Fl_Help_View *)0;
 
 Fl_Text_Display *source_view=(Fl_Text_Display *)0;
+
+Fl_Browser *file_browser=(Fl_Browser *)0;
 
 Fl_Input *server_input=(Fl_Input *)0;
 
@@ -44,16 +44,13 @@ static void cb_Delete(Fl_Button*, void*) {
 
 Fl_Double_Window* make_window() {
   Fl_Double_Window* w;
-  { Fl_Double_Window* o = new Fl_Double_Window(740, 400);
+  { Fl_Double_Window* o = new Fl_Double_Window(740, 401);
     w = o; if (w) {/* empty */}
     o->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
-    { file_browser = new Fl_Browser(0, 20, 220, 135, "Files");
-      file_browser->type(1);
-      file_browser->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-    } // Fl_Browser* file_browser
     { Fl_Tabs* o = new Fl_Tabs(220, 0, 520, 400);
       { Fl_Group* o = new Fl_Group(220, 20, 520, 380, "Edit");
         { text_editor = new Fl_Text_Editor(220, 50, 520, 325);
+          Fl_Group::current()->resizable(text_editor);
         } // Fl_Text_Editor* text_editor
         { Fl_Button* o = new Fl_Button(220, 375, 520, 25, "Preview");
           o->callback((Fl_Callback*)cb_Preview);
@@ -75,29 +72,38 @@ Fl_Double_Window* make_window() {
         o->end();
       } // Fl_Group* o
       o->end();
+      Fl_Group::current()->resizable(o);
     } // Fl_Tabs* o
-    { server_input = new Fl_Input(70, 160, 145, 25, "Server");
-    } // Fl_Input* server_input
-    { user_input = new Fl_Input(70, 190, 145, 25, "User");
-    } // Fl_Input* user_input
-    { password_input = new Fl_Input(70, 220, 145, 25, "Password");
-      password_input->type(5);
-    } // Fl_Input* password_input
-    { Fl_Button* o = new Fl_Button(5, 250, 210, 25, "List");
-      o->callback((Fl_Callback*)cb_List);
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(5, 340, 210, 25, "Upload");
-      o->callback((Fl_Callback*)cb_Upload);
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(5, 310, 210, 25, "Create");
-      o->callback((Fl_Callback*)cb_Create);
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(5, 280, 210, 25, "Edit");
-      o->callback((Fl_Callback*)cb_Edit);
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(5, 370, 210, 25, "Delete");
-      o->callback((Fl_Callback*)cb_Delete);
-    } // Fl_Button* o
+    { Fl_Group* o = new Fl_Group(0, 0, 220, 400);
+      { file_browser = new Fl_Browser(0, 20, 220, 135, "Files");
+        file_browser->type(1);
+        file_browser->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+        Fl_Group::current()->resizable(file_browser);
+      } // Fl_Browser* file_browser
+      { server_input = new Fl_Input(70, 160, 145, 25, "Server");
+      } // Fl_Input* server_input
+      { user_input = new Fl_Input(70, 190, 145, 25, "User");
+      } // Fl_Input* user_input
+      { password_input = new Fl_Input(70, 220, 145, 25, "Password");
+        password_input->type(5);
+      } // Fl_Input* password_input
+      { Fl_Button* o = new Fl_Button(5, 250, 210, 25, "List");
+        o->callback((Fl_Callback*)cb_List);
+      } // Fl_Button* o
+      { Fl_Button* o = new Fl_Button(5, 340, 210, 25, "Upload");
+        o->callback((Fl_Callback*)cb_Upload);
+      } // Fl_Button* o
+      { Fl_Button* o = new Fl_Button(5, 310, 210, 25, "Create");
+        o->callback((Fl_Callback*)cb_Create);
+      } // Fl_Button* o
+      { Fl_Button* o = new Fl_Button(5, 280, 210, 25, "Edit");
+        o->callback((Fl_Callback*)cb_Edit);
+      } // Fl_Button* o
+      { Fl_Button* o = new Fl_Button(5, 370, 210, 25, "Delete");
+        o->callback((Fl_Callback*)cb_Delete);
+      } // Fl_Button* o
+      o->end();
+    } // Fl_Group* o
     o->end();
   } // Fl_Double_Window* o
   text_editor->buffer(new Fl_Text_Buffer());

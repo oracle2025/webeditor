@@ -10,8 +10,6 @@ void preview();
 void edit(); 
 void create(); 
 #include <FL/Fl_Double_Window.H>
-#include <FL/Fl_Browser.H>
-extern Fl_Browser *file_browser;
 #include <FL/Fl_Tabs.H>
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Text_Editor.H>
@@ -23,6 +21,8 @@ extern Fl_Output *filename_output;
 extern Fl_Help_View *html_view;
 #include <FL/Fl_Text_Display.H>
 extern Fl_Text_Display *source_view;
+#include <FL/Fl_Browser.H>
+extern Fl_Browser *file_browser;
 #include <FL/Fl_Input.H>
 extern Fl_Input *server_input;
 extern Fl_Input *user_input;
