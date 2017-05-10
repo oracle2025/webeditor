@@ -4,30 +4,62 @@
 
 Fl_Box *question_box=(Fl_Box *)0;
 
-Fl_Box *image_box=(Fl_Box *)0;
-
 Fl_Input *answer_input=(Fl_Input *)0;
 
 static void cb_Go(Fl_Return_Button*, void*) {
   go();
 }
 
+Fl_Wizard *wizard=(Fl_Wizard *)0;
+
+Fl_Box *image_box=(Fl_Box *)0;
+
+Fl_Box *good_box=(Fl_Box *)0;
+
+Fl_Group *bad_group=(Fl_Group *)0;
+
+Fl_Box *bad_box=(Fl_Box *)0;
+
+Fl_Box *solution_box=(Fl_Box *)0;
+
 Fl_Double_Window* make_window() {
   Fl_Double_Window* w;
-  { Fl_Double_Window* o = new Fl_Double_Window(660, 425);
+  { Fl_Double_Window* o = new Fl_Double_Window(661, 426);
     w = o; if (w) {/* empty */}
     { question_box = new Fl_Box(0, 0, 660, 40, "What is it?");
       question_box->box(FL_UP_BOX);
     } // Fl_Box* question_box
-    { image_box = new Fl_Box(0, 40, 660, 360);
-      image_box->box(FL_UP_BOX);
-      Fl_Group::current()->resizable(image_box);
-    } // Fl_Box* image_box
     { answer_input = new Fl_Input(0, 400, 590, 25);
     } // Fl_Input* answer_input
     { Fl_Return_Button* o = new Fl_Return_Button(590, 400, 70, 25, "Go!");
       o->callback((Fl_Callback*)cb_Go);
     } // Fl_Return_Button* o
+    { wizard = new Fl_Wizard(0, 40, 660, 360);
+      { image_box = new Fl_Box(0, 40, 660, 360);
+        Fl_Group::current()->resizable(image_box);
+      } // Fl_Box* image_box
+      { good_box = new Fl_Box(0, 40, 660, 360, "Good");
+        good_box->labelfont(1);
+        good_box->labelsize(92);
+        good_box->labelcolor((Fl_Color)59);
+        good_box->hide();
+      } // Fl_Box* good_box
+      { bad_group = new Fl_Group(0, 40, 660, 360);
+        bad_group->hide();
+        { bad_box = new Fl_Box(0, 40, 660, 165, "Bad");
+          bad_box->labelfont(1);
+          bad_box->labelsize(81);
+          bad_box->labelcolor((Fl_Color)1);
+        } // Fl_Box* bad_box
+        { solution_box = new Fl_Box(0, 205, 660, 195, "1");
+          solution_box->labelfont(1);
+          solution_box->labelsize(92);
+        } // Fl_Box* solution_box
+        bad_group->end();
+      } // Fl_Group* bad_group
+      wizard->end();
+      Fl_Group::current()->resizable(wizard);
+    } // Fl_Wizard* wizard
     o->end();
   } // Fl_Double_Window* o
   return w;

@@ -14,10 +14,10 @@ auto dbfile = "../picturequiz/data/picturequiz.sqlite3";
 static int callback(void *NotUsed, int argc, char **argv, char **azColName){
     int i;
     for(i=0; i<argc; i++){
-      	printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+          //printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
       	word = argv[i];
     }
-    printf("\n");
+    //printf("\n");
     return 0;
 }
 
@@ -79,14 +79,24 @@ void next_word()
 }
 void go()
 {
-	std::cout << "GO!" << std::endl;
+	//std::cout << "GO!" << std::endl;
 	auto guess = answer_input->value();
+
+
+	if (wizard->value() != image_box) {
+		wizard->value(image_box);
+		return;
+	}
+
 	if (word == guess) {
-		std::cout << "Good" << std::endl;
+		//std::cout << "Good" << std::endl;
 		answer_input->value("");
+		wizard->value(good_box);
 		next_word();
 	} else {
-		std::cout << "Bad" << std::endl;
+		wizard->value(bad_group);
+		solution_box->label(word.c_str());
+		//std::cout << "Bad" << std::endl;
 	}
 }
 
@@ -98,7 +108,7 @@ int main(int argc, const char *argv[])
 
 	Fl_JPEG_Image jpg(filename);      // load jpeg image into ram
 	image_box->image(jpg);
-
+	wizard->value(image_box);
 
     next_word();
 

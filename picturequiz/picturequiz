@@ -5,22 +5,42 @@ code_name {.cpp}
 Function {make_window()} {open
 } {
   Fl_Window {} {open
-    xywh {621 138 660 425} type Double resizable visible
+    xywh {847 261 661 426} type Double resizable visible
   } {
     Fl_Box question_box {
       label {What is it?}
       xywh {0 0 660 40} box UP_BOX
-    }
-    Fl_Box image_box {
-      xywh {0 40 660 360} box UP_BOX resizable
     }
     Fl_Input answer_input {
       xywh {0 400 590 25}
     }
     Fl_Return_Button {} {
       label {Go!}
-      callback {go();} selected
+      callback {go();}
       xywh {590 400 70 25}
+    }
+    Fl_Wizard wizard {open
+      xywh {0 40 660 360} resizable
+    } {
+      Fl_Box image_box {selected
+        xywh {0 40 660 360} resizable
+      }
+      Fl_Box good_box {
+        label Good
+        xywh {0 40 660 360} labelfont 1 labelsize 92 labelcolor 59 hide
+      }
+      Fl_Group bad_group {open
+        xywh {0 40 660 360} hide
+      } {
+        Fl_Box bad_box {
+          label Bad
+          xywh {0 40 660 165} labelfont 1 labelsize 81 labelcolor 1
+        }
+        Fl_Box solution_box {
+          label 1
+          xywh {0 205 660 195} labelfont 1 labelsize 92
+        }
+      }
     }
   }
 }

@@ -6,10 +6,17 @@
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 extern Fl_Box *question_box;
-extern Fl_Box *image_box;
 #include <FL/Fl_Input.H>
 extern Fl_Input *answer_input;
 #include <FL/Fl_Return_Button.H>
+#include <FL/Fl_Wizard.H>
+extern Fl_Wizard *wizard;
+extern Fl_Box *image_box;
+extern Fl_Box *good_box;
+#include <FL/Fl_Group.H>
+extern Fl_Group *bad_group;
+extern Fl_Box *bad_box;
+extern Fl_Box *solution_box;
 Fl_Double_Window* make_window();
 void go(); 
 #endif
