@@ -1,0 +1,137 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cpp}
+Function {make_window()} {open
+} {
+  Fl_Window {} {open
+    xywh {311 261 725 426} type Double resizable visible
+  } {
+    Fl_Box question_box {
+      label {What is it?}
+      xywh {0 100 725 40} box UP_BOX
+    }
+    Fl_Input answer_input {
+      xywh {0 400 655 25}
+    }
+    Fl_Return_Button {} {
+      label {Go!}
+      callback {go();}
+      xywh {655 400 70 25}
+    }
+    Fl_Wizard wizard {open
+      xywh {0 140 725 260} resizable
+    } {
+      Fl_Box image_box {
+        xywh {0 140 725 260} hide resizable
+      }
+      Fl_Box good_box {
+        label Good
+        xywh {0 140 725 260} labelfont 1 labelsize 92 labelcolor 59 hide
+      }
+      Fl_Group bad_group {open
+        xywh {0 140 725 260}
+      } {
+        Fl_Box bad_box {
+          label Bad
+          xywh {0 140 725 65} labelfont 1 labelsize 81 labelcolor 1
+        }
+        Fl_Box solution_box {
+          label 1
+          xywh {0 205 725 195} labelfont 1 labelsize 92
+        }
+      }
+    }
+    Fl_Group {} {open
+      xywh {0 0 725 35} box UP_BOX
+    } {
+      Fl_Value_Output bucket {
+        label Bucket
+        xywh {55 5 45 25}
+      }
+      Fl_Value_Output level_1 {
+        label {Level 1}
+        xywh {210 5 45 25}
+      }
+      Fl_Value_Output level_2 {
+        label {Level 2}
+        xywh {310 5 45 25}
+      }
+      Fl_Value_Output level_3 {
+        label {Level 3}
+        xywh {410 5 45 25}
+      }
+      Fl_Value_Output level_4 {
+        label {Level 4}
+        xywh {510 5 45 25}
+      }
+      Fl_Value_Output level_5 {
+        label {Level 5} selected
+        xywh {610 5 45 25}
+      }
+      Fl_Button {} {
+        label {@->}
+        tooltip Add xywh {100 5 25 25}
+      }
+    }
+    Fl_Group {} {open
+      xywh {0 35 725 65} box UP_BOX
+    } {
+      Fl_Value_Output session {
+        label Session
+        xywh {60 55 45 25}
+      }
+      Fl_Value_Output deck_current {
+        label {Deck Current}
+        xywh {200 40 45 25}
+      }
+      Fl_Value_Output deck_retired {
+        label {Deck Retired}
+        xywh {200 70 45 25}
+      }
+      Fl_Value_Output deck_0 {
+        label {Deck 0}
+        xywh {295 40 45 25}
+      }
+      Fl_Value_Output deck_1 {
+        label {Deck 1}
+        xywh {390 40 45 25}
+      }
+      Fl_Value_Output deck_2 {
+        label {Deck 2}
+        xywh {485 40 45 25}
+      }
+      Fl_Value_Output deck_3 {
+        label {Deck 3}
+        xywh {580 40 45 25}
+      }
+      Fl_Value_Output deck_4 {
+        label {Deck 4}
+        xywh {675 40 45 25}
+      }
+      Fl_Value_Output deck_5 {
+        label {Deck 5}
+        xywh {295 70 45 25}
+      }
+      Fl_Value_Output deck_6 {
+        label {Deck 6}
+        xywh {390 70 45 25}
+      }
+      Fl_Value_Output deck_7 {
+        label {Deck 7}
+        xywh {485 70 45 25}
+      }
+      Fl_Value_Output deck_8 {
+        label {Deck 8}
+        xywh {580 70 45 25}
+      }
+      Fl_Value_Output deck_9 {
+        label {Deck 9}
+        xywh {675 70 45 25}
+      }
+    }
+  }
+}
+
+decl {void go();} {public global
+}

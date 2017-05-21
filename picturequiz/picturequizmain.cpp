@@ -15,11 +15,16 @@
 
 inline bool exists_test0 (const std::string& name)
 {
+#if WIN32
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 	std::wstring wstr = converter.from_bytes(name);
 
 	std::ifstream f(wstr);
     return f.good();
+#else
+	std::ifstream f(name);
+    return f.good();
+#endif
 }
 std::string word;
 auto dbfile = "../picturequiz/data/picturequiz.sqlite3";
@@ -80,7 +85,8 @@ void next_word()
 		switch ( jpg->fail() ) {
     		case Fl_Image::ERR_NO_IMAGE:
     		case Fl_Image::ERR_FILE_ACCESS:
-        		fl_alert("/tmp/foo.jpg: %s");//, strerror(errno));    // shows actual os error to user
+                //fl_alert("/tmp/foo.jpg: %s");//, strerror(errno));    // shows actual os error to user
+        		fl_alert("/tmp/foo.jpg: ");
     		case Fl_Image::ERR_FORMAT:
         		fl_alert("/tmp/foo.jpg: couldn't decode image");
         	default:
@@ -122,6 +128,39 @@ void next_word()
 
 
     sqlite3_close(db);
+}
+static int select_from_db_callback(void *pResult, int argc, char **argv, char **azColName){
+    int i;
+    int *result = (int*)pResult;
+    for(i=0; i<argc; i++){
+		  printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+		  *result = atoi(argv[i]);
+          //word = argv[i];
+    }
+    //printf("\n");
+    return 0;
+}
+int select_from_db(const char* sql)
+{
+	sqlite3 *db;
+    char *zErrMsg = 0;
+    int rc;
+
+    rc = sqlite3_open(dbfile, &db);
+    if( rc ){
+      	fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+      	sqlite3_close(db);
+      	return -1;
+    }
+     //auto sql_select = std::string("SELECT COUNT (*) FROM words");
+	auto sql_select = std::string(sql);
+	int result = -1;
+	rc = sqlite3_exec(db, sql_select.c_str(), select_from_db_callback, &result, &zErrMsg);
+	if( rc!=SQLITE_OK ){
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	}
+	return result;
 }
 void go()
 {
@@ -185,8 +224,47 @@ If a learner is successful at a card from Deck Current, it gets transferred into
  *
  */
 
+class Session
+{
+public:
+	Session();
+	~Session();
+
+private:
+	/* data */
+};
+class Card
+{
+public:
+	Card();
+	~Card();
+
+private:
+	/* data */
+};
+class Deck
+{
+public:
+	Deck();
+	~Deck();
+
+private:
+	/* data */
+};
 int main(int argc, const char *argv[])
 {
+	std::vector<std::vector<int> > progress_decks {
+		{0, 2, 5, 9},
+		{1, 3, 6, 0},
+    	{2, 4, 7, 1},
+    	{3, 5, 8, 2},
+    	{4, 6, 9, 3},
+    	{5, 7, 0, 4},
+    	{6, 8, 1, 5},
+    	{7, 9, 2, 6},
+    	{8, 0, 3, 7},
+    	{9, 1, 4, 8}
+	};
 	fl_register_images();
 	auto window = make_window();
 
@@ -195,6 +273,9 @@ int main(int argc, const char *argv[])
 	Fl_JPEG_Image jpg(filename);      // load jpeg image into ram
 	image_box->image(jpg);
 	wizard->value(image_box);
+	//std::cout << "Result: " << select_from_db("SELECT COUNT (*) FROM words") << std::endl; 
+	bucket->value(select_from_db("SELECT COUNT (*) FROM words"));
+
 
     next_word();
 

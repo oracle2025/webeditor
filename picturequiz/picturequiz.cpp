@@ -22,36 +22,74 @@ Fl_Box *bad_box=(Fl_Box *)0;
 
 Fl_Box *solution_box=(Fl_Box *)0;
 
+Fl_Value_Output *bucket=(Fl_Value_Output *)0;
+
+Fl_Value_Output *level_1=(Fl_Value_Output *)0;
+
+Fl_Value_Output *level_2=(Fl_Value_Output *)0;
+
+Fl_Value_Output *level_3=(Fl_Value_Output *)0;
+
+Fl_Value_Output *level_4=(Fl_Value_Output *)0;
+
+Fl_Value_Output *level_5=(Fl_Value_Output *)0;
+
+Fl_Value_Output *session=(Fl_Value_Output *)0;
+
+Fl_Value_Output *deck_current=(Fl_Value_Output *)0;
+
+Fl_Value_Output *deck_retired=(Fl_Value_Output *)0;
+
+Fl_Value_Output *deck_0=(Fl_Value_Output *)0;
+
+Fl_Value_Output *deck_1=(Fl_Value_Output *)0;
+
+Fl_Value_Output *deck_2=(Fl_Value_Output *)0;
+
+Fl_Value_Output *deck_3=(Fl_Value_Output *)0;
+
+Fl_Value_Output *deck_4=(Fl_Value_Output *)0;
+
+Fl_Value_Output *deck_5=(Fl_Value_Output *)0;
+
+Fl_Value_Output *deck_6=(Fl_Value_Output *)0;
+
+Fl_Value_Output *deck_7=(Fl_Value_Output *)0;
+
+Fl_Value_Output *deck_8=(Fl_Value_Output *)0;
+
+Fl_Value_Output *deck_9=(Fl_Value_Output *)0;
+
 Fl_Double_Window* make_window() {
   Fl_Double_Window* w;
-  { Fl_Double_Window* o = new Fl_Double_Window(661, 426);
+  { Fl_Double_Window* o = new Fl_Double_Window(725, 426);
     w = o; if (w) {/* empty */}
-    { question_box = new Fl_Box(0, 0, 660, 40, "What is it?");
+    { question_box = new Fl_Box(0, 100, 725, 40, "What is it?");
       question_box->box(FL_UP_BOX);
     } // Fl_Box* question_box
-    { answer_input = new Fl_Input(0, 400, 590, 25);
+    { answer_input = new Fl_Input(0, 400, 655, 25);
     } // Fl_Input* answer_input
-    { Fl_Return_Button* o = new Fl_Return_Button(590, 400, 70, 25, "Go!");
+    { Fl_Return_Button* o = new Fl_Return_Button(655, 400, 70, 25, "Go!");
       o->callback((Fl_Callback*)cb_Go);
     } // Fl_Return_Button* o
-    { wizard = new Fl_Wizard(0, 40, 660, 360);
-      { image_box = new Fl_Box(0, 40, 660, 360);
+    { wizard = new Fl_Wizard(0, 140, 725, 260);
+      { image_box = new Fl_Box(0, 140, 725, 260);
+        image_box->hide();
         Fl_Group::current()->resizable(image_box);
       } // Fl_Box* image_box
-      { good_box = new Fl_Box(0, 40, 660, 360, "Good");
+      { good_box = new Fl_Box(0, 140, 725, 260, "Good");
         good_box->labelfont(1);
         good_box->labelsize(92);
         good_box->labelcolor((Fl_Color)59);
         good_box->hide();
       } // Fl_Box* good_box
-      { bad_group = new Fl_Group(0, 40, 660, 360);
-        bad_group->hide();
-        { bad_box = new Fl_Box(0, 40, 660, 165, "Bad");
+      { bad_group = new Fl_Group(0, 140, 725, 260);
+        { bad_box = new Fl_Box(0, 140, 725, 65, "Bad");
           bad_box->labelfont(1);
           bad_box->labelsize(81);
           bad_box->labelcolor((Fl_Color)1);
         } // Fl_Box* bad_box
-        { solution_box = new Fl_Box(0, 205, 660, 195, "1");
+        { solution_box = new Fl_Box(0, 205, 725, 195, "1");
           solution_box->labelfont(1);
           solution_box->labelsize(92);
         } // Fl_Box* solution_box
@@ -60,6 +98,55 @@ Fl_Double_Window* make_window() {
       wizard->end();
       Fl_Group::current()->resizable(wizard);
     } // Fl_Wizard* wizard
+    { Fl_Group* o = new Fl_Group(0, 0, 725, 35);
+      o->box(FL_UP_BOX);
+      { bucket = new Fl_Value_Output(55, 5, 45, 25, "Bucket");
+      } // Fl_Value_Output* bucket
+      { level_1 = new Fl_Value_Output(210, 5, 45, 25, "Level 1");
+      } // Fl_Value_Output* level_1
+      { level_2 = new Fl_Value_Output(310, 5, 45, 25, "Level 2");
+      } // Fl_Value_Output* level_2
+      { level_3 = new Fl_Value_Output(410, 5, 45, 25, "Level 3");
+      } // Fl_Value_Output* level_3
+      { level_4 = new Fl_Value_Output(510, 5, 45, 25, "Level 4");
+      } // Fl_Value_Output* level_4
+      { level_5 = new Fl_Value_Output(610, 5, 45, 25, "Level 5");
+      } // Fl_Value_Output* level_5
+      { Fl_Button* o = new Fl_Button(100, 5, 25, 25, "@->");
+        o->tooltip("Add");
+      } // Fl_Button* o
+      o->end();
+    } // Fl_Group* o
+    { Fl_Group* o = new Fl_Group(0, 35, 725, 65);
+      o->box(FL_UP_BOX);
+      { session = new Fl_Value_Output(60, 55, 45, 25, "Session");
+      } // Fl_Value_Output* session
+      { deck_current = new Fl_Value_Output(200, 40, 45, 25, "Deck Current");
+      } // Fl_Value_Output* deck_current
+      { deck_retired = new Fl_Value_Output(200, 70, 45, 25, "Deck Retired");
+      } // Fl_Value_Output* deck_retired
+      { deck_0 = new Fl_Value_Output(295, 40, 45, 25, "Deck 0");
+      } // Fl_Value_Output* deck_0
+      { deck_1 = new Fl_Value_Output(390, 40, 45, 25, "Deck 1");
+      } // Fl_Value_Output* deck_1
+      { deck_2 = new Fl_Value_Output(485, 40, 45, 25, "Deck 2");
+      } // Fl_Value_Output* deck_2
+      { deck_3 = new Fl_Value_Output(580, 40, 45, 25, "Deck 3");
+      } // Fl_Value_Output* deck_3
+      { deck_4 = new Fl_Value_Output(675, 40, 45, 25, "Deck 4");
+      } // Fl_Value_Output* deck_4
+      { deck_5 = new Fl_Value_Output(295, 70, 45, 25, "Deck 5");
+      } // Fl_Value_Output* deck_5
+      { deck_6 = new Fl_Value_Output(390, 70, 45, 25, "Deck 6");
+      } // Fl_Value_Output* deck_6
+      { deck_7 = new Fl_Value_Output(485, 70, 45, 25, "Deck 7");
+      } // Fl_Value_Output* deck_7
+      { deck_8 = new Fl_Value_Output(580, 70, 45, 25, "Deck 8");
+      } // Fl_Value_Output* deck_8
+      { deck_9 = new Fl_Value_Output(675, 70, 45, 25, "Deck 9");
+      } // Fl_Value_Output* deck_9
+      o->end();
+    } // Fl_Group* o
     o->end();
   } // Fl_Double_Window* o
   return w;
