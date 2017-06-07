@@ -466,6 +466,8 @@ using json = nlohmann::json;
 int main(int argc, const char *argv[])
 {
 	auto window = make_window();
+	text_editor->wrap_mode(Fl_Text_Display::WRAP_AT_BOUNDS, 0);
+	text_editor->textfont(FL_COURIER);
 
 	std::ifstream i("login.json");
 	if (i.is_open()) {

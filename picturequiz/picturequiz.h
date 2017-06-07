@@ -17,6 +17,7 @@ extern Fl_Box *good_box;
 extern Fl_Group *bad_group;
 extern Fl_Box *bad_box;
 extern Fl_Box *solution_box;
+#include <FL/Fl_Button.H>
 #include <FL/Fl_Value_Output.H>
 extern Fl_Value_Output *bucket;
 extern Fl_Value_Output *level_1;
@@ -24,7 +25,6 @@ extern Fl_Value_Output *level_2;
 extern Fl_Value_Output *level_3;
 extern Fl_Value_Output *level_4;
 extern Fl_Value_Output *level_5;
-#include <FL/Fl_Button.H>
 extern Fl_Value_Output *session;
 extern Fl_Value_Output *deck_current;
 extern Fl_Value_Output *deck_retired;
@@ -40,4 +40,5 @@ extern Fl_Value_Output *deck_8;
 extern Fl_Value_Output *deck_9;
 Fl_Double_Window* make_window();
 void go(); 
+void mark_as_poor_card(); 
 #endif

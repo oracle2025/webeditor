@@ -22,6 +22,10 @@ Fl_Box *bad_box=(Fl_Box *)0;
 
 Fl_Box *solution_box=(Fl_Box *)0;
 
+static void cb_Mark(Fl_Button*, void*) {
+  mark_as_poor_card();
+}
+
 Fl_Value_Output *bucket=(Fl_Value_Output *)0;
 
 Fl_Value_Output *level_1=(Fl_Value_Output *)0;
@@ -72,7 +76,7 @@ Fl_Double_Window* make_window() {
     { Fl_Return_Button* o = new Fl_Return_Button(655, 400, 70, 25, "Go!");
       o->callback((Fl_Callback*)cb_Go);
     } // Fl_Return_Button* o
-    { wizard = new Fl_Wizard(0, 140, 725, 260);
+    { wizard = new Fl_Wizard(0, 140, 730, 260);
       { image_box = new Fl_Box(0, 140, 725, 260);
         image_box->hide();
         Fl_Group::current()->resizable(image_box);
@@ -83,7 +87,7 @@ Fl_Double_Window* make_window() {
         good_box->labelcolor((Fl_Color)59);
         good_box->hide();
       } // Fl_Box* good_box
-      { bad_group = new Fl_Group(0, 140, 725, 260);
+      { bad_group = new Fl_Group(0, 140, 730, 260);
         { bad_box = new Fl_Box(0, 140, 725, 65, "Bad");
           bad_box->labelfont(1);
           bad_box->labelsize(81);
@@ -93,6 +97,9 @@ Fl_Double_Window* make_window() {
           solution_box->labelfont(1);
           solution_box->labelsize(92);
         } // Fl_Box* solution_box
+        { Fl_Button* o = new Fl_Button(590, 375, 135, 25, "Mark as poor Card");
+          o->callback((Fl_Callback*)cb_Mark);
+        } // Fl_Button* o
         bad_group->end();
       } // Fl_Group* bad_group
       wizard->end();

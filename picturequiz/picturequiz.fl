@@ -20,7 +20,7 @@ Function {make_window()} {open
       xywh {655 400 70 25}
     }
     Fl_Wizard wizard {open
-      xywh {0 140 725 260} resizable
+      xywh {0 140 730 260} resizable
     } {
       Fl_Box image_box {
         xywh {0 140 725 260} hide resizable
@@ -30,7 +30,7 @@ Function {make_window()} {open
         xywh {0 140 725 260} labelfont 1 labelsize 92 labelcolor 59 hide
       }
       Fl_Group bad_group {open
-        xywh {0 140 725 260}
+        xywh {0 140 730 260}
       } {
         Fl_Box bad_box {
           label Bad
@@ -39,6 +39,11 @@ Function {make_window()} {open
         Fl_Box solution_box {
           label 1
           xywh {0 205 725 195} labelfont 1 labelsize 92
+        }
+        Fl_Button {} {
+          label {Mark as poor Card}
+          callback {mark_as_poor_card();}
+          xywh {590 375 135 25}
         }
       }
     }
@@ -66,7 +71,7 @@ Function {make_window()} {open
         xywh {510 5 45 25}
       }
       Fl_Value_Output level_5 {
-        label {Level 5} selected
+        label {Level 5}
         xywh {610 5 45 25}
       }
       Fl_Button {} {
@@ -133,5 +138,8 @@ Function {make_window()} {open
   }
 }
 
-decl {void go();} {public global
+decl {void go();} {selected public global
+}
+
+decl {void mark_as_poor_card();} {public global
 }

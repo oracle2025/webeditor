@@ -26,6 +26,8 @@ include_directories("sundown/src")
 include_directories("sundown/html")
 include_directories("FtpClient")
 
+add_subdirectory("gtd_viewer")
+
 add_executable(picturequiz
 	sqlite3.c
 	sqlite3.h

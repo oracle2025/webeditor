@@ -40,6 +40,10 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName){
 }
 std::shared_ptr<Fl_JPEG_Image> g_image;
 
+void mark_as_poor_card()
+{
+}
+
 void next_word()
 {
    	sqlite3 *db;
@@ -58,13 +62,13 @@ void next_word()
 		  fprintf(stderr, "SQL error: %s\n", zErrMsg);
 		  sqlite3_free(zErrMsg);
 	}
-	auto sql_select = std::string("SELECT word FROM words ORDER BY RANDOM() LIMIT 1;");
+	auto sql_select = std::string("SELECT word FROM words WHERE active = 1 ORDER BY RANDOM() LIMIT 1;");
 	rc = sqlite3_exec(db, sql_select.c_str(), callback, 0, &zErrMsg);
 	if( rc!=SQLITE_OK ){
 		fprintf(stderr, "SQL error: %s\n", zErrMsg);
 		sqlite3_free(zErrMsg);
 	}
-	question_box->label(word.c_str());
+	//question_box->label(word.c_str());
 
 	std::ostringstream str;
 	const char* prefix = "../picturequiz/data/images/";
