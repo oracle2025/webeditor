@@ -1,15 +1,17 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "dirent.h"
 #include <cstdlib>
 #include "gtdwindow.h"
-#include <windows.h>
-#include <FL/x.H>
 
 #ifdef WIN32
 	#define PATH_SEP "\\"
+	#include "dirent.h"
+	#include <windows.h>
+	#include <FL/x.H>
 #else
+ 	 #include <sys/types.h>
+     #include <sys/dir.h>
 	#define PATH_SEP "/"
 #endif
 
@@ -112,7 +114,9 @@ int main(int argc, const char *argv[])
 	}
 	
 	auto window = make_window();
+#ifdef WIN32
 	window->icon((char*)LoadIcon(fl_display, MAKEINTRESOURCE(101)));
+#endif
 	refresh_path_list();
 	refresh_file_list();
 	window->show();
