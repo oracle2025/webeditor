@@ -114,20 +114,20 @@ Deck unserialize_deck(const std::string &stored)
 
 	for (int i = 0; i < 10; i++) {
 		if (!j["working_stacks"][i].is_null()) {
-			for (auto j: j["working_stacks"][i]) {
-				 result.m_working_stacks[i].cards.push_back({j.get<std::string>()});
+			for (auto k: j["working_stacks"][i]) {
+				 result.m_working_stacks[i].cards.push_back({k.get<std::string>()});
 			}
 		}
 	}
 
 	if (!j["current_stack"].is_null()) {
-		for (auto j: j["current_stack"]) {
-			 result.m_current_stack.cards.push_back({j.get<std::string>()});
+		for (auto k: j["current_stack"]) {
+			 result.m_current_stack.cards.push_back({k.get<std::string>()});
 		}
 	}
 	if (!j["retired_stack"].is_null()) {
-		for (auto j: j["retired_stack"]) {
-			 result.m_retired_stack.cards.push_back({j.get<std::string>()});
+		for (auto k: j["retired_stack"]) {
+			 result.m_retired_stack.cards.push_back({k.get<std::string>()});
 		}
 	}
 
