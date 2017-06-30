@@ -1,0 +1,72 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cpp}
+Function {make_window()} {open
+} {
+  Fl_Window {} {open
+    xywh {509 258 555 440} type Double resizable visible
+  } {
+    Fl_Button {} {
+      label {Start Session}
+      callback {start_session();}
+      xywh {0 0 105 25}
+    }
+    Fl_Button {} {
+      label {Add Card}
+      callback {add_card();}
+      xywh {105 0 105 25}
+    }
+    Fl_Value_Output cards_in_session {
+      label {Cards in Session}
+      xywh {325 0 60 25}
+    }
+    Fl_Wizard wizard {open
+      xywh {0 25 555 390} resizable
+    } {
+      Fl_Box image_box {
+        xywh {0 25 555 390} hide
+      }
+      Fl_Box good_box {
+        label Good selected
+        xywh {0 25 555 390} labelfont 1 labelsize 60 labelcolor 61 hide
+      }
+      Fl_Group bad_box {open
+        xywh {0 25 555 390}
+      } {
+        Fl_Box {} {
+          label Bad
+          xywh {0 25 555 175} labelfont 1 labelsize 60 labelcolor 88
+        }
+        Fl_Box answer_box {
+          xywh {0 200 555 215} labelfont 1 labelsize 60
+        }
+      }
+      Fl_Box session_over {
+        label {Session Over}
+        xywh {0 25 555 390} labelfont 1 labelsize 60 hide
+      }
+    }
+    Fl_Return_Button {} {
+      label Go
+      callback {go();}
+      xywh {500 415 55 25}
+    }
+    Fl_Input answer_input {
+      xywh {0 415 500 25}
+    }
+    Fl_Value_Output session_nr {
+      label {Session Nr}
+      xywh {490 0 60 25}
+    }
+  }
+}
+
+decl {void go();} {public global
+}
+
+decl {void add_card();} {public global
+}
+
+decl {void start_session();} {public global
+}

@@ -12,6 +12,9 @@ Card::Card(const std::string &word) :
 	m_word(word)
 {
 }
+Card::Card()
+{
+}
 
 
 Stack::type Stack::create(std::vector<int> number_card)
@@ -25,6 +28,9 @@ size_t Stack::size() const
 std::vector<Card::type> Stack::cards()
 {
 	return m_cards;
+}
+Stack::Stack()
+{
 }
 Stack::Stack(std::vector<int> number_card) :
 	m_number_card(number_card)
@@ -76,16 +82,16 @@ Card::type Deck::pull()
 	m_session_cards.pop_back();
 	return result;
 }
-int Deck::get_remaining()
+size_t Deck::get_remaining()
 {
 	return m_session_cards.size();
 }
 void Deck::review(Card::type card, int result)
 {
 	if (result) {
-		m_working_stacks[m_current_session]->cards().push_back(card);
+		m_working_stacks[m_current_session]->append_card(card);
 	} else {
-		m_current_stack->cards().push_back(card);
+		m_current_stack->append_card(card);
 	}
 }
 Stack::type Deck::get_stack(int number)
@@ -95,6 +101,22 @@ Stack::type Deck::get_stack(int number)
 Deck::Deck()
 {
 	//m_working_stacks.push_back();
+		m_current_stack = Stack::create({});
+		m_retired_stack = Stack::create({});
+		m_working_stacks.push_back(Stack::create({2, 5, 9}));
+		m_working_stacks.push_back(Stack::create({3, 6, 0}));
+		m_working_stacks.push_back(Stack::create({4, 7, 1}));
+		m_working_stacks.push_back(Stack::create({5, 8, 2}));
+		m_working_stacks.push_back(Stack::create({6, 9, 3}));
+		m_working_stacks.push_back(Stack::create({7, 0, 4}));
+		m_working_stacks.push_back(Stack::create({8, 1, 5}));
+		m_working_stacks.push_back(Stack::create({9, 2, 6}));
+		m_working_stacks.push_back(Stack::create({0, 3, 7}));
+		m_working_stacks.push_back(Stack::create({1, 4, 8}));
+}
+int Deck::session_nr()
+{
+	return m_current_session;
 }
 
 void Stack::append_card(Card::type card)

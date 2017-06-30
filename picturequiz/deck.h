@@ -3,7 +3,9 @@
 
 #include <memory>
 #include <cereal/types/memory.hpp>
+#include <cereal/types/vector.hpp>
 #include <cereal/archives/binary.hpp>
+#include <cereal/archives/json.hpp>
 
 class Card
 {
@@ -19,6 +21,8 @@ class Card
 			ar(m_word);
 		}
 	private:
+		friend class cereal::access; 
+		Card();
 		Card(const std::string &word);
 
 		std::string m_word;
@@ -42,9 +46,11 @@ class Stack
 		template <class Archive>
 		void serialize( Archive & ar )
 		{
-			ar(m_cards, m_number_cards);
+			ar(m_cards, m_number_card);
 		}
 	private:
+		friend class cereal::access; 
+		Stack();
 		Stack(std::vector<int> number_card);
 		std::vector<Card::type> m_cards;
 		std::vector<int> m_number_card;
@@ -59,8 +65,9 @@ class Deck
 
 		void add_card(const std::string &word);
 		void start_session();
+		int session_nr();
 		Card::type pull();
-		int get_remaining();
+		size_t get_remaining();
 		void review(Card::type card, int result); //use enum class
 		Stack::type get_stack(int number);
 
@@ -74,6 +81,7 @@ class Deck
 				m_current_session );
 		}
 	private:
+		friend class cereal::access; 
 		Deck();
 		//Disable Copy Constructor Assignment, etc.
 		Stack::type m_current_stack;

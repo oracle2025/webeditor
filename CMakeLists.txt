@@ -25,6 +25,7 @@ include_directories(${FLTK_INCLUDE_DIR})
 include_directories("sundown/src")
 include_directories("sundown/html")
 include_directories("FtpClient")
+include_directories("cereal/include")
 
 add_subdirectory("gtd_viewer")
 
@@ -34,6 +35,15 @@ add_executable(picturequiz
 	picturequiz/picturequiz.cpp
 	picturequiz/picturequiz.h
 	picturequiz/picturequizmain.cpp
+	picturequiz/deck.h
+	picturequiz/deck.cpp
+	)
+add_executable(picturequiz2
+	picturequiz/picturequiz2.cpp
+	picturequiz/picturequiz2.h
+	picturequiz/main2.cpp
+	picturequiz/deck.h
+	picturequiz/deck.cpp
 	)
 #add_executable(webeditor WIN32
 add_executable(webeditor 
@@ -56,9 +66,11 @@ add_executable(webeditor
 if (UNIX)
 	target_link_libraries(webeditor ${FLTK_LIBRARIES} dl)
 	target_link_libraries(picturequiz ${FLTK_LIBRARIES} dl)
+	target_link_libraries(picturequiz2 ${FLTK_LIBRARIES} dl)
 else()
 	target_link_libraries(webeditor ${FLTK_LIBRARIES})
 	target_link_libraries(picturequiz ${FLTK_LIBRARIES})
+	target_link_libraries(picturequiz2 ${FLTK_LIBRARIES})
 endif()
 
 
