@@ -1,4 +1,5 @@
 #include "deck.h"
+#include <algorithm>
 
 Card::type Card::create(const std::string &word)
 {

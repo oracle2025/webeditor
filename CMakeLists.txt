@@ -20,6 +20,8 @@ find_package(FLTK REQUIRED)
 #link_directories(${OpenGL_LIBRARY_DIRS})
 #add_definitions(${OpenGL_DEFINITIONS})
 
+add_definitions("-Wno-deprecated-declarations")
+
 
 include_directories(${FLTK_INCLUDE_DIR})
 include_directories("sundown/src")
@@ -64,9 +66,9 @@ add_executable(webeditor
 	FtpClient/FTPListParse.cpp
 	)
 if (UNIX)
-	target_link_libraries(webeditor ${FLTK_LIBRARIES} dl)
-	target_link_libraries(picturequiz ${FLTK_LIBRARIES} dl)
-	target_link_libraries(picturequiz2 ${FLTK_LIBRARIES} dl)
+	target_link_libraries(webeditor ${FLTK_LIBRARIES} dl pthread)
+	target_link_libraries(picturequiz ${FLTK_LIBRARIES} dl pthread)
+	target_link_libraries(picturequiz2 ${FLTK_LIBRARIES} dl pthread)
 else()
 	target_link_libraries(webeditor ${FLTK_LIBRARIES})
 	target_link_libraries(picturequiz ${FLTK_LIBRARIES})
